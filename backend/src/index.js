@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import authRoutes from "./routes/auth_routes.js";
+import messageRoutes from "./routes/message_routes.js";
 
 const app = express();
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/message", messageRoutes);
 
 const port = process.env.PORT;
 
