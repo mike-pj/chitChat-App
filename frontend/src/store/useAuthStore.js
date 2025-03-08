@@ -27,7 +27,8 @@ export const useAuthStore = create((set) => ({
     signup: async (data) => {
         set({ isSigningUp: true });
         try {
-           const res = await axiosInstance.post(("http://localhost:5001/api/auth/signup"), data)
+           const res = await axiosInstance.post("http://localhost:5001/api/auth/signup", data, {
+            headers: { "Content-Type": "application/json" } });
            set({ authUser: res.data });
            toast.success("Account created successfully");
         } catch (error) {
@@ -37,4 +38,28 @@ export const useAuthStore = create((set) => ({
             set({ isSigningUp: false });
         }
     },
+
+    login: async (data) => {
+        set({ isLoggingIn: true });
+        try {
+            const res = await axiosInstance.post("http://localhost:5001/api/auth/login", data, {
+             headers: { "Content-Type": "application/json" } });
+            set({ authUser: res.data });
+            toast.success("Logged in successfully");
+         } catch (error) {
+             toast.error(error.response.data.message)
+         } finally {
+             set({ isLoggingIn: false });
+         }
+    },
+
+    logout: async () => {
+        try {
+            const res = await axiosInstance.post("http://localhost:5001/api/auth/logout");
+            set({ authUser: null });
+           toast.success("Logged out successfully");
+        } catch (error) {
+            toast.error(error.response.data.message)
+        }
+    }
 }));
