@@ -4,11 +4,12 @@ import cookieParser from "cookie-parser"
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
+import { app, server } from "./lib/socket.js";
 
 import authRoutes from "./routes/auth_routes.js";
 import messageRoutes from "./routes/message_routes.js";
 
-const app = express();
+
 
 const url = process.env.MONGODB_URI;
 
@@ -33,6 +34,6 @@ app.use("/api/messages", messageRoutes);
 
 const port = process.env.PORT;
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`server is running on port: ${port}`);
 });
