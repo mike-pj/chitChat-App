@@ -31,7 +31,7 @@ export const getMessages = async(req, res) => {
         console.error("Error in getMessages controller: ", error.message);
         res.status(500).json({ error: "internal server error "});
     }
-}
+};
 
 
 export const sendMessages = async(req, res) => {
