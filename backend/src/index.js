@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser"
 import cors from "cors";
+import path from "path";
 import dotenv from "dotenv";
 dotenv.config();
 import { app, server } from "./lib/socket.js";
@@ -22,6 +23,8 @@ mongoose
     console.log("Error connecting to DB");
   });
 
+const __dirname = path.resolve();
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
@@ -31,6 +34,16 @@ app.use(cors({
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
+
+if(process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+
+  app.length("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+  });
+};
+
 
 const port = process.env.PORT;
 
