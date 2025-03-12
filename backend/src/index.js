@@ -10,8 +10,6 @@ import { app, server } from "./lib/socket.js";
 import authRoutes from "./routes/auth_routes.js";
 import messageRoutes from "./routes/message_routes.js";
 
-
-
 const url = process.env.MONGODB_URI;
 
 mongoose
@@ -23,6 +21,7 @@ mongoose
     console.log("Error connecting to DB");
   });
 
+const port = process.env.PORT;
 const __dirname = path.resolve();
 
 app.use(express.json());
@@ -45,7 +44,7 @@ if(process.env.NODE_ENV === "production") {
 };
 
 
-const port = process.env.PORT;
+
 
 server.listen(port, () => {
   console.log(`server is running on port: ${port}`);
