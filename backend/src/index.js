@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
-// import cors from "cors";
+import cors from "cors";
 import path from "path";
 import dotenv from "dotenv";
 dotenv.config();
@@ -24,10 +24,10 @@ mongoose
   
   app.use(express.json());
   app.use(cookieParser());
-  // app.use(cors({
-  //   origin: "http://localhost:5173",
-  //   credentials: true,
-  // }))
+  app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }))
   
 const __dirname = path.resolve();
 
