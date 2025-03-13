@@ -6,16 +6,17 @@ import express from "express";
 const app = express();
 const server = http.createServer(app);
 
-// const io = new Server(server, {
-//     cors: {
-//         origin: ["http://localhost:5173"], 
-//     },
-// });
 const io = new Server(server, {
     cors: {
-        origin:  ["https://chitchat-app-m5jx.onrender.com"],
+        origin: ["http://localhost:5173"], 
     },
 });
+
+// const io = new Server(server, {
+//     cors: {
+//         origin:  ["https://chitchat-app-m5jx.onrender.com"],
+//     },
+// });
 
 export function getReceiverSocketId(userId) {
     return userSocketMap[userId];
