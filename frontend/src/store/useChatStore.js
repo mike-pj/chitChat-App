@@ -14,17 +14,42 @@ export const useChatStore = create((set,get) => ({
 
 
     getUsers: async () => {
-        set({ isUsersLoading: true })
+        set({ isUsersLoading: true });
         try {
-            const res = await axiosInstance.get("http://localhost:5001/api/messages/users", {
-                headers: { "Content-Type": "application/json" } });
+            const token = localStorage.getItem("token"); // Get token from storage
+            
+            const res = await axiosInstance.get(
+                "http://localhost:5001/api/messages/users",
+                {
+                    headers: { 
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}` // Send token
+                    }
+                }
+            );
+    
             set({ users: res.data });
         } catch (error) {
-            toast.error(error.response.data.message);
+            console.error("Error in getUsers:", error);
+            toast.error(error.response?.data?.message || "Failed to load users");
         } finally {
             set({ isUsersLoading: false });
         }
     },
+    
+
+    // getUsers: async () => {
+    //     set({ isUsersLoading: true })
+    //     try {
+    //         const res = await axiosInstance.get("http://localhost:5001/api/messages/users", {
+    //             headers: { "Content-Type": "application/json" } });
+    //         set({ users: res.data });
+    //     } catch (error) {
+    //         toast.error(error.response.data.message);
+    //     } finally {
+    //         set({ isUsersLoading: false });
+    //     }
+    // },
 
 
     getMessages: async (userId) => {
