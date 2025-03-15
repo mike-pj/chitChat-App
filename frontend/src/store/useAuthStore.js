@@ -17,7 +17,10 @@ export const useAuthStore = create((set, get) => ({
   checkAuth: async () => {
     try {
       const res = await axiosInstance.get(
-        "http://localhost:5001/api/auth/check"
+        "http://localhost:5001/api/auth/check",
+        {
+          headers: { "Content-Type": "application/json" },
+        }
       );
 
       set({ authUser: res.data });
