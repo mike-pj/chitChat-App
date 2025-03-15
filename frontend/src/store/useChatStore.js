@@ -16,10 +16,11 @@ export const useChatStore = create((set,get) => ({
     getUsers: async () => {
         set({ isUsersLoading: true });
         try {
-            const token = localStorage.getItem("token"); // Get token from storage
+            const token = localStorage.getItem("chat_token"); // Get token from storage
             
             const res = await axiosInstance.get(
                 "http://localhost:5001/api/messages/users",
+                "https://chitchat-app-m5jx.onrender.com",
                 {
                     headers: { 
                         "Content-Type": "application/json",
