@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/users", protectRoute, getUsersForSidebar);
 
-router.get("/:id", protectRoute, getMessages)
+router.get("/:id", protectRoute, getMessages) //"/:id" - is the id that we would like to fetch our messages with
 
 router.post("/send/:id", protectRoute, sendMessages)
 

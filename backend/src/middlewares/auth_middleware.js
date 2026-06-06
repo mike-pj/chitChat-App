@@ -4,6 +4,8 @@ import User from "../models/user_model.js";
 export const protectRoute = async (req, res, next) => {
   const token = req.cookies.chat_token;
 
+  // go to index.js and import cookie-parser
+
   try {
     if (!token) {
       return res
@@ -31,3 +33,5 @@ export const protectRoute = async (req, res, next) => {
     res.status(500).json({ message: "Internal Server error" });
   }
 };
+
+//To be able to grab the token (jsontoken) from the cookies, we use cookie-parser
