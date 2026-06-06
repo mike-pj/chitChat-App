@@ -12,6 +12,7 @@ import messageRoutes from "./routes/message_routes.js";
 
 const url = process.env.MONGODB_URI;
 
+//connecting to database
 mongoose
   .connect(url)
   .then(() => {
