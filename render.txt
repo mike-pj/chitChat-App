@@ -1,0 +1,7 @@
+1. On render website go to new, the web services
+2. then your repo from github would show. Pick your app
+3. In the build command: npm run build
+4. In the start command: npm run start
+5. go down and choose free plan
+6. go down and add you environment variables
+7. you can also generate your JWT_SECRET : "openssl rand -base64 32"
