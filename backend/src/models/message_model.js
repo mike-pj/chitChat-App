@@ -24,4 +24,6 @@ const messageSchema = new mongoose.Schema(
 
 const Message = mongoose.model("Message", messageSchema);
 
-export default Message;  
+export default Message; 
+
+//After doing the model create the routes in the route folder and go to index.js to create the endpoint as well

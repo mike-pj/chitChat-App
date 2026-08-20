@@ -14,43 +14,17 @@ export const useChatStore = create((set,get) => ({
 
 
     getUsers: async () => {
-        set({ isUsersLoading: true });
+        set({ isUsersLoading: true })
         try {
-            const token = localStorage.getItem("chat_token"); // Get token from storage
-            
-            const res = await axiosInstance.get(
-                "http://localhost:5001/api/messages/users",
-                "https://chitchat-app-m5jx.onrender.com",
-                {
-                    headers: { 
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${token}` // Send token
-                    }
-                }
-            );
-    
+            const res = await axiosInstance.get("http://localhost:5001/api/messages/users", {
+                headers: { "Content-Type": "application/json" } });
             set({ users: res.data });
         } catch (error) {
-            console.error("Error in getUsers:", error);
-            toast.error(error.response?.data?.message || "Failed to load users");
+            toast.error(error.response.data.message);
         } finally {
             set({ isUsersLoading: false });
         }
     },
-    
-
-    // getUsers: async () => {
-    //     set({ isUsersLoading: true })
-    //     try {
-    //         const res = await axiosInstance.get("http://localhost:5001/api/messages/users", {
-    //             headers: { "Content-Type": "application/json" } });
-    //         set({ users: res.data });
-    //     } catch (error) {
-    //         toast.error(error.response.data.message);
-    //     } finally {
-    //         set({ isUsersLoading: false });
-    //     }
-    // },
 
 
     getMessages: async (userId) => {

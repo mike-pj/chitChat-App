@@ -4,6 +4,8 @@ import User from "../models/user_model.js";
 export const protectRoute = async (req, res, next) => {
   const token = req.cookies.chat_token;
 
+  // go to index.js and import cookie-parser
+
   try {
     if (!token) {
       return res
@@ -17,7 +19,7 @@ export const protectRoute = async (req, res, next) => {
       return res.status(401).json({ message: "Unauthorized - Invalid Token" });
     }
 
-    const user = await User.findById(decoded.userId).select(-"password");
+    const user = await User.findById(decoded.userId).select("-password");
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -31,3 +33,5 @@ export const protectRoute = async (req, res, next) => {
     res.status(500).json({ message: "Internal Server error" });
   }
 };
+
+//To be able to grab the token (jsontoken) from the cookies, we use cookie-parser

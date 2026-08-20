@@ -65,3 +65,7 @@ const port = process.env.PORT;
 server.listen(port, () => {
   console.log(`server is running on port: ${port}`);
 });
+
+
+// after checking you code and all is running fine, you then run "npm run build"
+//This would create a dist folder in your frontend directory. You can then deploy your backend and frontend together.
